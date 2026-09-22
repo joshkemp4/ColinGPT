@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
+<title>Colin</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+    <header class="header">
+      <div class="header-inner">
+        <div class="avatar">C</div>
+        <div class="contact-name">Colin</div>
+      </div>
+    </header>
+
+    <main class="messages" id="messages"></main>
+
+    <form class="composer" id="composer">
+      <input
+        type="text"
+        id="messageInput"
+        class="composer-input"
+        placeholder="Text Message"
+        autocomplete="off"
+        maxlength="500"
+      >
+      <button type="submit" class="send-button" id="sendButton" aria-label="Send" disabled>
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none">
+          <path d="M12 19V5M12 5L5 12M12 5L19 12" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    </form>
+  </div>
+
+  <script src="catchphrases.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
