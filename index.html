@@ -7,10 +7,35 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <div class="lock-screen" id="lockScreen">
+    <div class="lock-time" id="lockTime">9:41</div>
+    <div class="lock-date" id="lockDate">Monday, September 22</div>
+
+    <form class="passcode-section" id="passcodeForm">
+      <div class="passcode-label">Enter Passcode</div>
+      <div class="passcode-box" id="passcodeBox">
+        <div class="passcode-dots" id="passcodeDots"></div>
+        <input
+          type="text"
+          id="passcodeInput"
+          class="passcode-input"
+          autocomplete="off"
+          autocapitalize="off"
+          autocorrect="off"
+          spellcheck="false"
+        >
+      </div>
+      <div class="lock-error" id="lockError">Incorrect Passcode</div>
+    </form>
+  </div>
+
   <div class="app">
     <header class="header">
       <div class="header-inner">
-        <div class="avatar">C</div>
+        <div class="avatar" id="avatar">
+          <span class="avatar-initial" id="avatarInitial">C</span>
+          <img class="avatar-photo" id="avatarPhoto" alt="Colin">
+        </div>
         <div class="contact-name">Colin</div>
       </div>
     </header>
@@ -34,7 +59,10 @@
     </form>
   </div>
 
+  <script src="lock.js"></script>
+  <script src="lockscreen.js"></script>
   <script src="catchphrases.js"></script>
+  <script src="photos.js"></script>
   <script src="script.js"></script>
 </body>
 </html>

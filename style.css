@@ -52,6 +52,7 @@ body {
 }
 
 .avatar {
+  position: relative;
   width: 36px;
   height: 36px;
   border-radius: 50%;
@@ -63,6 +64,24 @@ body {
   font-size: 15px;
   font-weight: 600;
   margin-bottom: 2px;
+  overflow: hidden;
+}
+
+.avatar-photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: none;
+}
+
+.avatar.has-photo .avatar-photo {
+  display: block;
+}
+
+.avatar.has-photo .avatar-initial {
+  display: none;
 }
 
 .contact-name {
@@ -154,6 +173,25 @@ body {
   clip-path: polygon(100% 0, 0% 100%, 100% 100%);
 }
 
+/* GIF bubbles */
+.bubble.gif-bubble {
+  padding: 0;
+  overflow: hidden;
+  max-width: 60%;
+  line-height: 0;
+}
+
+.bubble.gif-bubble img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.row.mine.tail .bubble.gif-bubble::after,
+.row.theirs.tail .bubble.gif-bubble::after {
+  content: none;
+}
+
 /* Typing indicator */
 .typing-bubble {
   display: flex;
@@ -226,4 +264,123 @@ body {
 
 .send-button:not(:disabled):active {
   transform: scale(0.9);
+}
+
+/* Lock screen */
+.lock-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: linear-gradient(160deg, #1c1c3d 0%, #3a2d6b 45%, #8a4fae 100%);
+  color: #fff;
+  padding-top: max(70px, calc(env(safe-area-inset-top) + 50px));
+  padding-bottom: env(safe-area-inset-bottom);
+  transition: opacity 0.4s ease;
+}
+
+.lock-screen.unlocking {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.lock-screen.hidden {
+  display: none;
+}
+
+.lock-time {
+  font-size: 76px;
+  font-weight: 200;
+  line-height: 1;
+  letter-spacing: -1px;
+}
+
+.lock-date {
+  font-size: 17px;
+  font-weight: 500;
+  margin-top: 6px;
+  opacity: 0.9;
+}
+
+.passcode-section {
+  margin-top: 64px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 0 24px;
+}
+
+.passcode-label {
+  font-size: 14px;
+  opacity: 0.85;
+}
+
+.passcode-box {
+  position: relative;
+  min-width: 180px;
+  min-height: 46px;
+  padding: 0 18px;
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.passcode-box.shake {
+  animation: passcode-shake 0.4s;
+}
+
+@keyframes passcode-shake {
+  10%, 90% { transform: translateX(-1px); }
+  20%, 80% { transform: translateX(3px); }
+  30%, 50%, 70% { transform: translateX(-6px); }
+  40%, 60% { transform: translateX(6px); }
+}
+
+.passcode-dots {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.passcode-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #fff;
+  flex: 0 0 auto;
+}
+
+.passcode-input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: transparent;
+  color: transparent;
+  caret-color: transparent;
+  font-size: 16px;
+  text-align: center;
+  outline: none;
+}
+
+.lock-error {
+  font-size: 13px;
+  color: #ff6961;
+  min-height: 16px;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.lock-error.show {
+  opacity: 1;
 }

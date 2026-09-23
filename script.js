@@ -5,12 +5,16 @@ const messagesEl = document.getElementById("messages");
 const composerEl = document.getElementById("composer");
 const inputEl = document.getElementById("messageInput");
 const sendButtonEl = document.getElementById("sendButton");
+const avatarEl = document.getElementById("avatar");
+const avatarPhotoEl = document.getElementById("avatarPhoto");
 
 let messages = loadMessages();
 let lastCatchphrase = null;
+let lastPhoto = null;
 
 renderAll();
 scrollToBottom(false);
+setAvatarPhoto(pickPhoto());
 
 inputEl.addEventListener("input", () => {
   sendButtonEl.disabled = inputEl.value.trim().length === 0;
@@ -21,7 +25,7 @@ composerEl.addEventListener("submit", (e) => {
   const text = inputEl.value.trim();
   if (!text) return;
 
-  addMessage({ sender: "me", text, time: Date.now() });
+  addMessage({ sender: "me", content: text, time: Date.now() });
   inputEl.value = "";
   sendButtonEl.disabled = true;
   inputEl.focus();
@@ -30,7 +34,8 @@ composerEl.addEventListener("submit", (e) => {
   showTyping();
   setTimeout(() => {
     hideTyping();
-    addMessage({ sender: "colin", text: pickCatchphrase(), time: Date.now() });
+    addMessage({ sender: "colin", content: pickCatchphrase(), time: Date.now() });
+    setAvatarPhoto(pickPhoto());
   }, delay);
 });
 
@@ -59,6 +64,27 @@ function pickCatchphrase() {
   } while (choice === lastCatchphrase);
   lastCatchphrase = choice;
   return choice;
+}
+
+function pickPhoto() {
+  if (!CONTACT_PHOTOS || CONTACT_PHOTOS.length === 0) return null;
+  if (CONTACT_PHOTOS.length === 1) return CONTACT_PHOTOS[0];
+  let choice;
+  do {
+    choice = CONTACT_PHOTOS[Math.floor(Math.random() * CONTACT_PHOTOS.length)];
+  } while (choice === lastPhoto);
+  lastPhoto = choice;
+  return choice;
+}
+
+function setAvatarPhoto(src) {
+  if (!src) {
+    avatarEl.classList.remove("has-photo");
+    return;
+  }
+  avatarPhotoEl.onload = () => avatarEl.classList.add("has-photo");
+  avatarPhotoEl.onerror = () => avatarEl.classList.remove("has-photo");
+  avatarPhotoEl.src = src;
 }
 
 function addMessage(msg) {
@@ -93,9 +119,21 @@ function makeRow(msg, isTail) {
   const row = document.createElement("div");
   row.className = `row ${msg.sender === "me" ? "mine" : "theirs"}${isTail ? " tail" : ""}`;
 
+  const content = msg.content !== undefined ? msg.content : msg.text; // fallback for messages saved before GIF support
   const bubble = document.createElement("div");
-  bubble.className = "bubble";
-  bubble.textContent = msg.text;
+  const isGif = typeof content === "object" && content !== null && content.gif;
+
+  if (isGif) {
+    bubble.className = "bubble gif-bubble";
+    const img = document.createElement("img");
+    img.src = content.gif;
+    img.alt = "GIF";
+    img.loading = "lazy";
+    bubble.appendChild(img);
+  } else {
+    bubble.className = "bubble";
+    bubble.textContent = content;
+  }
 
   row.appendChild(bubble);
   return row;
