@@ -45,25 +45,46 @@ body {
 }
 
 .header-inner {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 8px 12px 10px;
 }
 
+.reset-button {
+  position: absolute;
+  top: 4px;
+  right: 8px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: none;
+  background: #f0f0f2;
+  color: var(--text-gray);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.reset-button:active {
+  background: #e2e2e5;
+}
+
 .avatar {
   position: relative;
-  width: 36px;
-  height: 36px;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
   background: #b0b3b8;
   color: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 15px;
+  font-size: 24px;
   font-weight: 600;
-  margin-bottom: 2px;
+  margin-bottom: 4px;
   overflow: hidden;
 }
 

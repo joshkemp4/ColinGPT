@@ -7,6 +7,7 @@ const inputEl = document.getElementById("messageInput");
 const sendButtonEl = document.getElementById("sendButton");
 const avatarEl = document.getElementById("avatar");
 const avatarPhotoEl = document.getElementById("avatarPhoto");
+const resetButtonEl = document.getElementById("resetButton");
 
 let messages = loadMessages();
 let lastCatchphrase = null;
@@ -18,6 +19,16 @@ setAvatarPhoto(pickPhoto());
 
 inputEl.addEventListener("input", () => {
   sendButtonEl.disabled = inputEl.value.trim().length === 0;
+});
+
+resetButtonEl.addEventListener("click", () => {
+  if (!confirm("Clear this conversation?")) return;
+  messages = [];
+  lastCatchphrase = null;
+  lastPhoto = null;
+  saveMessages();
+  renderAll();
+  setAvatarPhoto(pickPhoto());
 });
 
 composerEl.addEventListener("submit", (e) => {
