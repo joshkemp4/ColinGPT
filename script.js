@@ -16,9 +16,15 @@ let lastPhoto = null;
 renderAll();
 scrollToBottom(false);
 setAvatarPhoto(pickPhoto());
+initViewportHandling();
 
 inputEl.addEventListener("input", () => {
   sendButtonEl.disabled = inputEl.value.trim().length === 0;
+});
+
+inputEl.addEventListener("focus", () => {
+  // wait for the keyboard's open animation before re-scrolling
+  setTimeout(() => scrollToBottom(true), 300);
 });
 
 resetButtonEl.addEventListener("click", () => {
@@ -49,6 +55,20 @@ composerEl.addEventListener("submit", (e) => {
     setAvatarPhoto(pickPhoto());
   }, delay);
 });
+
+function initViewportHandling() {
+  const vv = window.visualViewport;
+  if (!vv) return;
+
+  const syncAppHeight = () => {
+    document.documentElement.style.setProperty("--app-height", `${vv.height}px`);
+    window.scrollTo(0, 0); // undo iOS's auto-scroll-to-focused-input
+  };
+
+  vv.addEventListener("resize", syncAppHeight);
+  vv.addEventListener("scroll", syncAppHeight);
+  syncAppHeight();
+}
 
 function loadMessages() {
   try {
