@@ -29,9 +29,12 @@ const CATCHPHRASES = [
   "That's AI",
   "I NEED A BREAK",
   "Candice? From Raro Tribe?",
+  "God help us",
+  "What's the move",
   { gif: "gifs/BreakingBad_1.gif" },
   { gif: "gifs/BreakingBad_2.gif" },
   { gif: "gifs/Joker.gif" },
   { gif: "gifs/Lebron.gif" },
   { gif: "gifs/SnoopWho.gif" },
+  { gif: "gifs/Angels.gif" }
 ];
