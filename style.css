@@ -77,17 +77,17 @@ body {
 
 .avatar {
   position: relative;
-  width: 96px;
-  height: 96px;
+  width: 192px;
+  height: 192px;
   border-radius: 50%;
   background: #b0b3b8;
   color: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 38px;
+  font-size: 76px;
   font-weight: 600;
-  margin-bottom: 6px;
+  margin-bottom: 8px;
   overflow: hidden;
 }
 
