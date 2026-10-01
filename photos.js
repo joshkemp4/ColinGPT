@@ -17,6 +17,7 @@ const CONTACT_PHOTOS = [
   "photos/Colin_Picnic.jpg",
   "photos/Colin_Pumpkin.jpg",
   "photos/Colin_Sandwich.jpg",
+  "photos/Colin_Skipping.jpg",
   "photos/Colin_SnowBowl.jpg",
   "photos/Colin_Tractor.jpg",
 ];
